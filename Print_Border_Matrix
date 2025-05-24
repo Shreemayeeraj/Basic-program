@@ -1,0 +1,137 @@
+#include<iostream>
+using namespace std;
+/*print border elements of the matrix*/
+int space=0,sq=0;
+int spac(int num)
+{   
+    /*counting the number of digits the matrix element have*/
+    int count=0;
+    while(num!=0)
+    {
+    num=num/10;
+    count++;
+    }
+    return count;
+}
+void print(int arr[7][7],int r)
+{
+    int temp[25],l=0,i,j,m=0,n=0,ct;
+    cout<<endl<<endl<<endl;
+    sq++;
+    cout<<sq<<"th square is........."<<endl;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<r;j++)
+        {
+            /*for printing first row and last row elements of the matrix*/
+            if(i==0||i==(r-1))
+            {
+                cout<<arr[i][j];
+                ct=spac(arr[i][j]);
+                for(m=0;m<space-ct;m++)
+                {
+                    cout<<" ";
+                }
+            }
+            else{
+                /*for printing first column and last column elements of the matrix*/
+                if(j==0||j==(r-1))
+                {
+                    cout<<arr[i][j];
+                   ct=spac(arr[i][j]);
+                for(m=0;m<space-ct;m++)
+                {
+                    cout<<" ";
+                }
+                }
+                else{
+                    /*for printing the  spaces where the middle numbers are sitted*/
+                    ct=spac(arr[i][j]);
+                for(m=0;m<space;m++)
+                {
+                    cout<<" ";
+                }
+                    temp[l]=arr[i][j];
+                    l++;
+                }
+            }
+        }
+        cout<<endl;
+    }
+    /*storing the matrix elements in a new matrix which are not printed*/
+    if(l>1)
+    {
+        l=0;
+     for(i=0;i<r-2;i++)
+    {
+        for(j=0;j<r-2;j++)
+        {
+          arr[i][j]=temp[l];
+          l++;
+        }
+        cout<<endl;
+    }
+    print(arr,r-2);
+    }
+    else{
+        if(l==1)
+        {
+        /*printing the last matrix middle element*/
+        sq++;
+    cout<<endl<<endl<<endl;
+    cout<<sq<<"th square is........."<<endl;
+    cout<<endl;
+    for(m=0;m<space;m++)
+     {
+     cout<<" ";
+     }
+    cout<<temp[0];
+    cout<<endl<<endl;
+    }
+    }
+}
+int main()
+{
+    int arr[7][7],r,c,i,j,ct,m;
+    cout<<"Enter the  row and column of a matrix:";
+    cin>>r>>c;
+    /*entering elements of the matirx*/
+    for(i=0;i<r;i++)
+    {
+        cout<<"Enter "<<i+1<<"th row of the matix....."<<endl;
+        for(j=0;j<c;j++)
+        {
+            cout<<"Enter "<<j+1<<" element of the matix:";
+            cin>>arr[i][j];
+            ct=spac(arr[i][j]);
+            if(ct>space)
+            {
+                space=ct;
+            }
+        }
+    }
+    space=space+3;
+    /*printing the entered matrix*/
+    cout<<"Entered matrix is....."<<endl;
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            cout<<arr[i][j];
+           ct=spac(arr[i][j]);
+                for(m=0;m<space-ct;m++)
+                {
+                    cout<<" ";
+                }
+        }
+        cout<<endl;
+    }
+    if(r==c/*&&r%2!=0*/)
+    {
+        print(arr,r);
+    }
+    else{
+        cout<<"Matrix border printing can't happen.......";
+    }
+    return 0;
+}
